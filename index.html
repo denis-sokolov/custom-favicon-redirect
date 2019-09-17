@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang=en>
+<title>Redirecting...</title>
+<link rel=icon href="data:image/x-icon;base64,AAABAAEAEBAQAAAAAAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAsC8qAP+EAACzh1cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAACAAAAAAAAACAAAAAAAAEiAAAAADAAAiAAAAAAMzAiAAAAAAAAMzAAAAAAAAAiMzMAAAAAAAADAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA" />
+<body>
+<script>
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  async function main(){
+    const params = new URLSearchParams(location.search);
+
+    const icon = params.get('icon');
+    if (icon) {
+      document.querySelector('link[rel="icon"]').href = icon;
+    }
+
+    const url = params.get('url');
+    if (url) {
+      // Allow the browser to pick up the favicon
+      await sleep(200);
+      window.location.href = url;
+    } else {
+      document.body.innerText = "Add ?url=https://example.com/ to the URL";
+      document.title = 'Configure redirection';
+    }
+  }
+  main();
+</script>
+</body>
+</html>
